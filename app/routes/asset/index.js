@@ -6,6 +6,5 @@ router.get('/', asset.index);
 router.get('/:id', asset.asset);
 router.post('/', asset.create);
 router.post('/update', asset.update);
-router.delete('/delete/:id', asset.delete);
 
 module.exports = router;
