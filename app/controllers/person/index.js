@@ -4,10 +4,10 @@ const { successResponse, errorResponse } = require('../../helpers/response.js');
 
 exports.create = async (req, res) => {
     try{
-        await person.create(req.body);
+        const result = await person.create(req.body);
         return res
             .status(StatusCodes.CREATED)
-            .json(successResponse('created successfully.', []));
+            .json(successResponse('created successfully.', { id: result.insertId }));
 
     }catch(err){
         return res
