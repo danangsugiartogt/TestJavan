@@ -14,6 +14,29 @@ exports.create = async(data) => {
     }
 }
 
+exports.index = async() => {
+    try{
+        const query = 'SELECT * FROM persons';
+        const [rows] = await connection.execute(query);
+
+        return rows;
+    }catch(err){
+        return err;
+    }
+}
+
+exports.person = async(id) => {
+    try{
+        const query = 'SELECT * FROM persons WHERE id=?';
+        const params = [ id ]
+        const [rows] = await connection.execute(query, params);
+
+        return rows;
+    }catch(err){
+        return err;
+    }
+}
+
 exports.update = async(data) => {
     try{
         const { id, name, gender } = data;
@@ -22,6 +45,20 @@ exports.update = async(data) => {
         const paramsUpdate = [ name, gender, id ];
 
         const [ rows ] = await connection.execute(queryUpdate, paramsUpdate);
+
+        if(rows.affectedRows > 0) return true;
+        return false;
+    }catch(err){
+        return err;
+    }
+}
+
+exports.delete = async(id) => {
+    try{
+        const query = 'DELETE FROM persons WHERE id=?';
+        const params = [ id ];
+
+        const [ rows ] = await connection.execute(query, params);
 
         if(rows.affectedRows > 0) return true;
         return false;
