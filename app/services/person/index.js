@@ -6,9 +6,9 @@ exports.create = async(data) => {
 
         const query = 'INSERT INTO persons (name, gender) VALUES (?,?)';
         const params = [ name, gender ];
-        const result = await connection.execute(query, params);
+        const [rows] = await connection.execute(query, params);
 
-        return result;
+        return rows;
     }catch(err){
         return err;
     }
