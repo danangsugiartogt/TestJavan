@@ -66,10 +66,6 @@ exports.relationById = async(id) => {
 
 exports.relationByParentId = async(parentId) => {
     try{
-        // const query = 'SELECT * FROM person_relations WHERE parent_id=?';
-        // const params = [ id ]
-        // const [rows] = await connection.execute(query, params);
-
         const query = `SELECT child.name as child_name, parent.name as parent_name
                        FROM person_relations pr 
                        LEFT JOIN persons child ON child.id = pr.child_id
@@ -78,7 +74,7 @@ exports.relationByParentId = async(parentId) => {
 
         const params = [ parentId ];
         const [rows] = await connection.execute(query, params);
-        console.log(rows);
+
         if(rows.length > 0){
 
             let childs = [];
