@@ -5,6 +5,13 @@ const { successResponse, errorResponse } = require('../../helpers/response.js');
 exports.create = async (req, res) => {
     try{
         const result = await personRelation.create(req.body);
+
+        if(!result.insertId){
+            return res
+                .status(StatusCodes.EXPECTATION_FAILED)
+                .json(errorResponse(result.sqlMessage));
+        }
+
         return res
             .status(StatusCodes.CREATED)
             .json(successResponse('relation created successfully.', { id: result.insertId }));
@@ -43,7 +50,7 @@ exports.relationByParentId = async (req, res) => {
         return res
             .status(StatusCodes.OK)
             .json(successResponse('get person relation successfully.', result));
-            
+
     }catch(err){
         return res
             .status(StatusCodes.EXPECTATION_FAILED)
@@ -90,10 +97,18 @@ exports.update = async (req, res) => {
     try{
         const result = await personRelation.update(req.body);
 
+        // person not found
         if(!result){
             return res
             .status(StatusCodes.NOT_FOUND)
             .json(errorResponse('the person relation not found.'));
+        }
+
+        // foreign key not found
+        if(!result.insertId){
+            return res
+                .status(StatusCodes.EXPECTATION_FAILED)
+                .json(errorResponse(result.sqlMessage));
         }
 
         return res

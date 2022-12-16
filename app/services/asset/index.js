@@ -2,10 +2,10 @@ const connection = require('../../database/mysqlConnection.js');
 
 exports.create = async(data) => {
     try{
-        const { person_id, asset_id } = data;
-
-        const query = 'INSERT INTO person_assets (person_id, asset_id) VALUES (?,?)';
-        const params = [ person_id, asset_id ];
+        const { name } = data;
+        console.log('tes')
+        const query = 'INSERT INTO assets (name) VALUES (?)';
+        const params = [ name ];
         const [rows] = await connection.execute(query, params);
 
         return rows;
@@ -16,7 +16,7 @@ exports.create = async(data) => {
 
 exports.index = async() => {
     try{
-        const query = 'SELECT * FROM person_assets';
+        const query = 'SELECT * FROM assets';
         const [rows] = await connection.execute(query);
 
         return rows;
@@ -25,21 +25,9 @@ exports.index = async() => {
     }
 }
 
-exports.assetById = async(id) => {
+exports.asset = async(id) => {
     try{
-        const query = 'SELECT * FROM person_assets WHERE id=?';
-        const params = [ id ]
-        const [rows] = await connection.execute(query, params);
-
-        return rows;
-    }catch(err){
-        return err;
-    }
-}
-
-exports.assetByPersonId = async(id) => {
-    try{
-        const query = 'SELECT * FROM person_assets WHERE person_id=?';
+        const query = 'SELECT * FROM assets WHERE id=?';
         const params = [ id ]
         const [rows] = await connection.execute(query, params);
 
@@ -51,12 +39,12 @@ exports.assetByPersonId = async(id) => {
 
 exports.update = async(data) => {
     try{
-        const { person_id, asset_id } = data;
+        const { id, name } = data;
 
-        const query = 'UPDATE person_assets SET person_id=?, asset_id=? WHERE person_id=?';
-        const params = [ person_id, asset_id, person_id ];
+        const queryUpdate = 'UPDATE assets SET name=? WHERE id=?';
+        const paramsUpdate = [ name, id ];
 
-        const [ rows ] = await connection.execute(query, params);
+        const [ rows ] = await connection.execute(queryUpdate, paramsUpdate);
 
         if(rows.affectedRows > 0) return true;
         return false;
@@ -67,7 +55,7 @@ exports.update = async(data) => {
 
 exports.delete = async(id) => {
     try{
-        const query = 'DELETE FROM person_assets WHERE person_id=?';
+        const query = 'DELETE FROM assets WHERE id=?';
         const params = [ id ];
 
         const [ rows ] = await connection.execute(query, params);
