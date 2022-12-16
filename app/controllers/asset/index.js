@@ -70,3 +70,23 @@ exports.update = async (req, res) => {
             .json(errorResponse(err));
     }
 }
+
+exports.delete = async (req, res) => {
+    try{
+        const result = await asset.delete(req.params.id);
+
+        if(!result){
+            return res
+            .status(StatusCodes.NOT_FOUND)
+            .json(errorResponse('the asset not found.'));
+        }
+
+        return res
+            .status(StatusCodes.OK)
+            .json(successResponse('deleted successfully.', []));
+    }catch(err){
+        return res
+            .status(StatusCodes.EXPECTATION_FAILED)
+            .json(errorResponse(err));
+    }
+}

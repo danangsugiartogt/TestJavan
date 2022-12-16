@@ -52,3 +52,22 @@ exports.update = async(data) => {
         return err;
     }
 }
+
+exports.delete = async(id) => {
+    try{
+        const query = 'DELETE FROM person_assets WHERE asset_id=?';
+        const params = [ id ];
+
+        await connection.execute(query, params);
+
+        const queryAsset = 'DELETE FROM assets WHERE id=?';
+        const paramsAsset = [ id ];
+
+        const [ rows ] = await connection.execute(queryAsset, paramsAsset);
+
+        if(rows.affectedRows > 0) return true;
+        return false;
+    }catch(err){
+        return err;
+    }
+}
