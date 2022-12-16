@@ -31,7 +31,7 @@ exports.create = async(data) => {
 
             childs.push(rows[0].child_name);
             result = { parent: rows[0].parent_name, childs };
-            
+
             return rows;
         }
 
@@ -64,11 +64,38 @@ exports.relationById = async(id) => {
     }
 }
 
-exports.relationByParentId = async(id) => {
+exports.relationByParentId = async(parentId) => {
     try{
-        const query = 'SELECT * FROM person_relations WHERE parent_id=?';
-        const params = [ id ]
+        // const query = 'SELECT * FROM person_relations WHERE parent_id=?';
+        // const params = [ id ]
+        // const [rows] = await connection.execute(query, params);
+
+        const query = `SELECT child.name as child_name, parent.name as parent_name
+                       FROM person_relations pr 
+                       LEFT JOIN persons child ON child.id = pr.child_id
+                       LEFT JOIN persons parent ON parent.id = pr.parent_id
+                       WHERE pr.parent_id=?`;
+
+        const params = [ parentId ];
         const [rows] = await connection.execute(query, params);
+        console.log(rows);
+        if(rows.length > 0){
+
+            let childs = [];
+            let result;
+
+            if(rows.length > 1){
+                for(let i = 0; i < rows.length; i++){
+                    childs.push(rows[i].child_name);
+                }
+    
+                result = { parent: rows[0].parent_name, childs };
+                return result;
+            }
+    
+            childs.push(rows[0].child_name);
+            result = { parent: rows[0].parent_name, childs };
+        }
 
         return rows;
     }catch(err){
@@ -104,10 +131,38 @@ exports.update = async(data) => {
     }
 }
 
-exports.delete = async(id) => {
+exports.deleteById = async(id) => {
     try{
         const query = 'DELETE FROM person_relations WHERE id=?';
         const params = [ id ];
+
+        const [ rows ] = await connection.execute(query, params);
+
+        if(rows.affectedRows > 0) return true;
+        return false;
+    }catch(err){
+        return err;
+    }
+}
+
+exports.deleteByParentId = async(parentId) => {
+    try{
+        const query = 'DELETE FROM person_relations WHERE parent_id=?';
+        const params = [ parentId ];
+
+        const [ rows ] = await connection.execute(query, params);
+
+        if(rows.affectedRows > 0) return true;
+        return false;
+    }catch(err){
+        return err;
+    }
+}
+
+exports.deleteByChildId = async(childId) => {
+    try{
+        const query = 'DELETE FROM person_relations WHERE child_id=?';
+        const params = [ childId ];
 
         const [ rows ] = await connection.execute(query, params);
 

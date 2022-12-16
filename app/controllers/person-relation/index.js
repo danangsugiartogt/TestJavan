@@ -121,9 +121,49 @@ exports.update = async (req, res) => {
     }
 }
 
-exports.delete = async (req, res) => {
+exports.deleteByid = async (req, res) => {
     try{
-        const result = await personRelation.delete(req.params.id);
+        const result = await personRelation.deleteById(req.params.id);
+
+        if(!result){
+            return res
+            .status(StatusCodes.NOT_FOUND)
+            .json(errorResponse('the person relation not found.'));
+        }
+
+        return res
+            .status(StatusCodes.OK)
+            .json(successResponse('relation deleted successfully.', []));
+    }catch(err){
+        return res
+            .status(StatusCodes.EXPECTATION_FAILED)
+            .json(errorResponse(err));
+    }
+}
+
+exports.deleteByChildId = async (req, res) => {
+    try{
+        const result = await personRelation.deleteByChildId(req.params.id);
+
+        if(!result){
+            return res
+            .status(StatusCodes.NOT_FOUND)
+            .json(errorResponse('the person relation not found.'));
+        }
+
+        return res
+            .status(StatusCodes.OK)
+            .json(successResponse('relation deleted successfully.', []));
+    }catch(err){
+        return res
+            .status(StatusCodes.EXPECTATION_FAILED)
+            .json(errorResponse(err));
+    }
+}
+
+exports.deleteByParentId = async (req, res) => {
+    try{
+        const result = await personRelation.deleteByParentId(req.params.id);
 
         if(!result){
             return res
