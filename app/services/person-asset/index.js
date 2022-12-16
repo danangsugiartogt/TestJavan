@@ -1,4 +1,5 @@
 const connection = require('../../database/mysqlConnection.js');
+const { asset } = require('../asset/index.js');
 
 exports.create = async(data) => {
     try{
@@ -39,11 +40,31 @@ exports.assetById = async(id) => {
 
 exports.assetByPersonId = async(id) => {
     try{
-        const query = 'SELECT * FROM person_assets WHERE person_id=?';
+        const query = `SELECT p.name as person_name, a.name as asset_name
+                       FROM person_assets pa 
+                       LEFT JOIN persons p ON p.id = pa.person_id 
+                       LEFT JOIN assets a ON a.id = pa.asset_id 
+                       WHERE pa.person_id=?`;
+        
         const params = [ id ]
         const [rows] = await connection.execute(query, params);
+        
+        let result;
+        let assets = [];
 
-        return rows;
+        if(rows.length > 1){
+            for(let i = 0; i < rows.length; i++){
+                assets.push(rows[i].asset_name);
+            }
+            
+            result = { name: rows[0].person_name, assets };
+            return result;
+        }
+
+        assets.push(rows[0].asset_name);
+        result = { name: rows[0].person_name, assets};
+
+        return result;
     }catch(err){
         return err;
     }
