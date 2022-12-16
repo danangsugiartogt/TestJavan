@@ -100,7 +100,7 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
     try{
-        const result = await personAsset.delete(req.params.personId);
+        const result = await personAsset.delete(req.body);
 
         if(!result){
             return res

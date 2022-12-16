@@ -7,6 +7,6 @@ router.get('/:id', personAsset.assetById);
 router.get('/person/:id', personAsset.assetByPersonId);
 router.post('/', personAsset.create);
 router.post('/update', personAsset.update);
-router.delete('/delete/:personId', personAsset.delete);
+router.delete('/delete', personAsset.delete);
 
 module.exports = router;

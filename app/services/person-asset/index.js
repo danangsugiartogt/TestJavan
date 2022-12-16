@@ -116,10 +116,11 @@ exports.update = async(data) => {
     }
 }
 
-exports.delete = async(id) => {
+exports.delete = async(data) => {
     try{
-        const query = 'DELETE FROM person_assets WHERE person_id=?';
-        const params = [ id ];
+        const { person_id, asset_id } = data;
+        const query = 'DELETE FROM person_assets WHERE person_id=? AND asset_id=?';
+        const params = [ person_id, asset_id ];
 
         const [ rows ] = await connection.execute(query, params);
 
