@@ -9,6 +9,34 @@ exports.create = async(data) => {
         const params = [ person_id, asset_id ];
         const [rows] = await connection.execute(query, params);
 
+        if(rows.insertId){
+            const query = `SELECT p.name as person_name, a.name as asset_name
+                           FROM person_assets pa 
+                           LEFT JOIN persons p ON p.id = pa.person_id 
+                           LEFT JOIN assets a ON a.id = pa.asset_id 
+                           WHERE pa.person_id=?`;
+
+            const params = [ person_id ]
+            const [rows] = await connection.execute(query, params);
+
+            let result;
+            let assets = [];
+
+            if(rows.length > 1){
+                for(let i = 0; i < rows.length; i++){
+                    assets.push(rows[i].asset_name);
+                }
+
+                result = { name: rows[0].person_name, assets };
+                return result;
+            }
+
+            assets.push(rows[0].asset_name);
+            result = { name: rows[0].person_name, assets};
+
+            return result;
+        }
+
         return rows;
     }catch(err){
         return err;
@@ -48,7 +76,9 @@ exports.assetByPersonId = async(id) => {
         
         const params = [ id ]
         const [rows] = await connection.execute(query, params);
-        
+
+        if(rows.length <= 0) return rows;
+
         let result;
         let assets = [];
 

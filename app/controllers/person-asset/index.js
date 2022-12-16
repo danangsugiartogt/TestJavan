@@ -6,7 +6,7 @@ exports.create = async (req, res) => {
     try{
         const result = await personAsset.create(req.body);
 
-        if(!result.insertId){
+        if(result.length <= 0){
             return res
                 .status(StatusCodes.EXPECTATION_FAILED)
                 .json(errorResponse(result.sqlMessage));
@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
 
         return res
             .status(StatusCodes.CREATED)
-            .json(successResponse('asset created successfully.', { id: result.insertId }));
+            .json(successResponse('asset created successfully.', result));
 
     }catch(err){
         return res
@@ -41,7 +41,7 @@ exports.assetByPersonId = async (req, res) => {
     try{
         const result = await personAsset.assetByPersonId(req.params.id);
 
-        if(result.length <= 0){
+        if(!result || result.length <= 0){
             return res
                 .status(StatusCodes.NOT_FOUND)
                 .json(errorResponse('the person asset not found.'));
