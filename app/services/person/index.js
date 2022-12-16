@@ -52,17 +52,3 @@ exports.update = async(data) => {
         return err;
     }
 }
-
-exports.delete = async(id) => {
-    try{
-        const query = 'DELETE FROM persons WHERE id=?';
-        const params = [ id ];
-
-        const [ rows ] = await connection.execute(query, params);
-
-        if(rows.affectedRows > 0) return true;
-        return false;
-    }catch(err){
-        return err;
-    }
-}

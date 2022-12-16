@@ -63,23 +63,3 @@ exports.update = async (req, res) => {
             .json(errorResponse(err));
     }
 }
-
-exports.delete = async (req, res) => {
-    try{
-        const result = await person.delete(req.params.id);
-
-        if(!result){
-            return res
-            .status(StatusCodes.NOT_FOUND)
-            .json(errorResponse('the person not found.'));
-        }
-
-        return res
-            .status(StatusCodes.OK)
-            .json(successResponse('deleted successfully.', []));
-    }catch(err){
-        return res
-            .status(StatusCodes.EXPECTATION_FAILED)
-            .json(errorResponse(err));
-    }
-}

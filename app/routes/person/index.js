@@ -6,6 +6,5 @@ router.get('/', person.index);
 router.get('/:id', person.person);
 router.post('/', person.create);
 router.post('/update', person.update);
-router.delete('/delete/:id', person.delete);
 
 module.exports = router;
