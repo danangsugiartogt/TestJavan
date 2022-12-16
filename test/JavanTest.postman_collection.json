@@ -1,0 +1,554 @@
+{
+	"info": {
+		"_postman_id": "cccca954-817c-4c4a-9329-895a67a664ed",
+		"name": "JavanTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Persons",
+			"item": [
+				{
+					"name": "CreatePerson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"mamim\",\r\n    \"gender\": \"Perempuan\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPersons",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Danang\",\r\n    \"gender\": \"Laki-laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPersonById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Danang\",\r\n    \"gender\": \"Laki-laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdatePerson",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 21,\r\n    \"name\": \"Dananggggg\",\r\n    \"gender\": \"Laki-laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person/update",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Person Relations",
+			"item": [
+				{
+					"name": "CreatRelation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"parent_id\": 1,\r\n    \"child_id\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-relation",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-relation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPersonRelations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Danang\",\r\n    \"gender\": \"Laki-laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-relation",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-relation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPersonRelationByParentId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-relation/parent/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-relation",
+								"parent",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePersonRelation",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Danang\",\r\n    \"gender\": \"Laki-laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-relation/delete/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-relation",
+								"delete",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePersonRelationByChildId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Danang\",\r\n    \"gender\": \"Laki-laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-relation/delete-child/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-relation",
+								"delete-child",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePersonRelationByParentId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Danang\",\r\n    \"gender\": \"Laki-laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-relation/delete-parent/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-relation",
+								"delete-parent",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assets",
+			"item": [
+				{
+					"name": "CreateAsset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"iPhone X\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/asset",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"asset"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAssets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/asset/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"asset",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetAssetById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"Danang\",\r\n    \"gender\": \"Laki-laki\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/asset/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"asset",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAsset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"name\": \"iPhone 13\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/asset/update",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"asset",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAsset",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/asset/3",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"asset",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Person Assets",
+			"item": [
+				{
+					"name": "CreatePersonAsset",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"person_id\": 2,\r\n    \"asset_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-asset/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-asset",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPersonAssets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-asset/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-asset",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetPersonAssetByPersonId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-asset/person/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-asset",
+								"person",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletePersonAsset",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"person_id\": 3,\r\n    \"asset_id\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/person-asset/delete/",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"person-asset",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Asset Price",
+			"item": [
+				{
+					"name": "GetTotalAssetPriceByPersonId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}:{{port}}{{prefixAPI}}/asset-price/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"port": "{{port}}{{prefixAPI}}",
+							"path": [
+								"asset-price",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
