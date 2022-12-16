@@ -8,6 +8,33 @@ exports.create = async(data) => {
         const params = [ child_id, parent_id ];
         const [rows] = await connection.execute(query, params);
 
+        if(rows.insertId){
+            const query = `SELECT child.name as child_name, parent.name as parent_name
+                           FROM person_relations pr 
+                           LEFT JOIN persons child ON child.id = pr.child_id
+                           LEFT JOIN persons parent ON parent.id = pr.parent_id
+                           WHERE pr.parent_id=?`;
+
+            const params = [ parent_id ];
+            const [rows] = await connection.execute(query, params);
+            
+            let childs = [];
+            let result;
+            if(rows.length > 1){
+                for(let i = 0; i < rows.length; i++){
+                    childs.push(rows[i].child_name);
+                }
+
+                result = { parent: rows[0].parent_name, childs };
+                return result;
+            }
+
+            childs.push(rows[0].child_name);
+            result = { parent: rows[0].parent_name, childs };
+            
+            return rows;
+        }
+
         return rows;
     }catch(err){
         return err;

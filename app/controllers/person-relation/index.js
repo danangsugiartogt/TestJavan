@@ -6,7 +6,7 @@ exports.create = async (req, res) => {
     try{
         const result = await personRelation.create(req.body);
 
-        if(!result.insertId){
+        if(result.sqlMessage){
             return res
                 .status(StatusCodes.EXPECTATION_FAILED)
                 .json(errorResponse(result.sqlMessage));
@@ -14,7 +14,7 @@ exports.create = async (req, res) => {
 
         return res
             .status(StatusCodes.CREATED)
-            .json(successResponse('relation created successfully.', { id: result.insertId }));
+            .json(successResponse('relation created successfully.', result));
 
     }catch(err){
         return res
