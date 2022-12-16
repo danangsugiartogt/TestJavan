@@ -12,6 +12,8 @@ exports.getPrice = async (personId) => {
         const params = [ personId ]
         const [rows] = await connection.execute(query, params);
 
+        if(rows.length <= 0) return rows;
+
         let assets = [];
         if(rows.length > 1){
             for(let i = 0; i < rows.length; i++){
@@ -22,7 +24,7 @@ exports.getPrice = async (personId) => {
             assets.push(rows[0].asset_name);
         }
 
-        const response = await axios.get('https://dummyjson.com/products/category/smartphones');
+        const response = await axios.get('https://dummyjson.com/products');
 
         let totalPrice = 0;
         if(response && response.data.products.length > 0){
